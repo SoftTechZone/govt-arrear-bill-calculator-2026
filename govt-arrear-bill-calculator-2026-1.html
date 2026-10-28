@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>জাতীয় বেতনস্কেল ২০২৬ — বকেয়া বিল ক্যালকুলেটর</title>
+<style>
+:root{
+  --bg:#f3f6f4; --card:#ffffff; --ink:#1b2a24; --muted:#5b6b64; --line:#dbe4df;
+  --brand:#0b6b4f; --brand2:#0e8a66; --soft:#e6f3ee; --warn:#fff4d6; --warnink:#7a5b00;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1714; --card:#17221e; --ink:#e7f0ec; --muted:#98aaa2; --line:#2a3a34; --soft:#1b2f28; --warn:#3a3210; --warnink:#f1d98a;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans Bengali","Kalpurush","SolaimanLipi",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:22px 16px;text-align:center}
+header h1{margin:0 0 4px;font-size:1.25rem}
+header p{margin:0;opacity:.92;font-size:.9rem}
+main{max-width:860px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{margin:0 0 10px;font-size:1.05rem;color:var(--brand)}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+select,input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media (max-width:620px){.grid2,.grid3{grid-template-columns:1fr}}
+button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;font:inherit;font-weight:600}
+.btn{background:var(--brand);color:#fff;width:100%;margin-top:14px;font-size:1rem}
+.btn2{background:var(--soft);color:var(--brand);margin-right:8px}
+.hint{font-size:.8rem;color:var(--muted);margin-top:4px}
+.warn{background:var(--warn);color:var(--warnink);padding:10px 12px;border-radius:10px;margin:8px 0;font-size:.88rem}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+td,th{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.hl td{background:var(--soft);font-weight:700}
+tr.net td{background:var(--soft);font-weight:700;color:var(--brand);font-size:1.02rem}
+.neg{color:#b91c1c}
+.row{display:flex;justify-content:space-between;gap:8px;font-size:.92rem;padding:4px 0}
+.row.total{border-top:1px solid var(--line);margin-top:6px;padding-top:8px;font-weight:700;font-size:1.05rem;color:var(--brand)}
+details{margin-top:8px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+details[open]{background:var(--soft)}
+summary{cursor:pointer;color:var(--brand);font-weight:700}
+.note{font-size:.82rem;color:var(--muted)}
+.ad{background:var(--soft);border:1px dashed var(--brand);border-radius:12px;padding:14px;text-align:center;font-weight:600}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:18px 12px 30px}
+.hidden{display:none}
+.chk{display:flex;align-items:flex-start;gap:8px;margin:10px 0;font-size:.9rem;color:var(--ink);cursor:pointer}
+.chk input{width:auto;margin-top:4px;flex:none}
+.scaletab{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:8px}
+.scaletab table{font-size:.78rem}
+.scaletab th{position:sticky;top:0;background:var(--card)}
+.gov{font-family:"Noto Sans Bengali","Kalpurush","SolaimanLipi",serif;font-size:.92rem;line-height:1.65;color:#000}
+.gov h3{text-align:center;margin:0 0 2px;font-size:1.02rem}
+.gov .sub{text-align:center;margin:0 0 14px;font-size:1rem;font-weight:700}
+.gov .idrow{display:flex;gap:6px;margin:4px 0}
+.gov .idrow .lb{flex:none}
+.gov .idrow .dots{flex:1;border-bottom:1px dotted #000;margin:0 6px;min-height:1.1em}
+.gov .idrow .vv{font-weight:700}
+.gov table{font-size:.86rem}
+.gov table td,.gov table th{border:1px solid #000;padding:5px}
+.gov .net{background:#eee;font-weight:700}
+.gov .sig{margin-top:30px;text-align:right}
+.gov .sig .l{display:inline-block;border-top:1px solid #000;padding-top:4px;min-width:220px;text-align:center}
+@page{size:A4;margin:14mm 12mm}
+@media print{
+  header,.noprint,.ad,footer{display:none!important}
+  body{background:#fff;color:#000} .card{border:0;padding:0}
+  #officialCard{display:none}
+  body.print-official main>.card:not(#officialCard){display:none!important}
+  body.print-official #msgs{display:none!important}
+  body.print-official #officialCard{display:block!important;margin:0;padding:0}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>জাতীয় বেতনস্কেল ২০২৬ — বকেয়া বিল ক্যালকুলেটর</h1>
+  <p>গ্রেড, ৩০ জুন ২০২৬-এর মূল বেতন ও জুলাই ২০২৬-এ গৃহীত মূল বেতন দিলেই নতুন মূল বেতন, বিশেষ সুবিধা ও বাড়ি ভাড়া সমন্বয়সহ বকেয়া বিবরণী তৈরি হবে।</p>
+</header>
+
+<main>
+  <div class="warn noprint">
+    <b>লক্ষ্য করুন:</b> নতুন স্কেলের ধাপগুলো প্রকাশিত সূত্র থেকে নেওয়া এবং কিছু গ্রেডের অঙ্ক নিশ্চিত নয়। ব্যবহারের আগে নিচের "স্কেল টেবিল" গেজেট (এস.আর.ও. ৩৪৭-আইন/২০২৬) দেখে মিলিয়ে নিন। এটি অনানুষ্ঠানিক হিসাব; চূড়ান্ত নির্ধারণ iBAS++ এ হবে। বাড়ি ভাড়ার হার ও বিশেষ সুবিধার হার আপনার পে-স্লিপের সাথে মিলিয়ে প্রয়োজনে বদলে দিন।
+  </div>
+
+  <section class="card noprint" id="inputCard">
+    <h2>ব্যক্তিগত তথ্য (বিবরণীর শিরোনামে আসবে)</h2>
+    <div class="grid3">
+      <div><label for="empName">নাম</label><input id="empName" type="text"></div>
+      <div><label for="desig">পদবি</label><input id="desig" type="text"></div>
+      <div><label for="offName">অফিস / প্রতিষ্ঠান</label><input id="offName" type="text"></div>
+    </div>
+
+    <h2 style="margin-top:18px">বেতন তথ্য</h2>
+    <div class="grid3">
+      <div><label for="grade">বর্তমান (২০১৫ স্কেলের) গ্রেড</label><select id="grade"></select></div>
+      <div><label for="juneSel">৩০ জুন ২০২৬ তারিখের মূল বেতন</label><select id="juneSel"></select></div>
+      <div><label for="julySel">১ জুলাই ২০২৬-এ গৃহীত মূল বেতন (বার্ষিক বৃদ্ধিসহ, যা তুলেছেন)</label><select id="julySel"></select></div>
+    </div>
+    <div class="grid3">
+      <div><label for="area">কর্মস্থল (বাড়ি ভাড়ার হার)</label>
+        <select id="area">
+          <option value="45">ঢাকা উত্তর/দক্ষিণ সিটি কর্পোরেশন</option>
+          <option value="35">অন্যান্য সিটি কর্পোরেশন এলাকা</option>
+          <option value="25" selected>অন্যান্য সব স্থান</option>
+        </select>
+      </div>
+      <div><label for="ratePct">বাড়ি ভাড়ার হার (%) — পে-স্লিপের সাথে মিলিয়ে নিন</label><input id="ratePct" type="number" inputmode="numeric" min="0" max="100" value="25"></div>
+      <div><label for="months">বকেয়ার মাস সংখ্যা</label><input id="months" type="number" inputmode="numeric" min="1" max="24" value="3"></div>
+    </div>
+    <label class="chk"><input type="checkbox" id="elig6" checked> ১ জুলাই ২০২৬ এর মধ্যে চাকরির বয়স ন্যূনতম ৬ মাস (১টি বার্ষিক বেতনবৃদ্ধি যোগ হবে)</label>
+
+    <details id="advBox">
+      <summary>ঐচ্ছিক: পে-স্লিপের প্রকৃত অঙ্ক বা গেজেটের অঙ্ক দিতে চাইলে</summary>
+      <div class="grid3" style="margin-top:8px">
+        <div><label for="ovFull">নতুন স্কেলে নির্ধারিত পূর্ণ মূল বেতন (iBAS++/গেজেট অনুযায়ী, থাকলে এটাই ধরা হবে)</label><input id="ovFull" type="number" inputmode="numeric" min="0"></div>
+        <div><label for="ovStage1">প্রথম ধাপে (জুলাই-ডিসেম্বর ২০২৬) প্রাপ্য মূল বেতন (জানা থাকলে সরাসরি দিন; নাহলে এটাই ধরা হবে)</label><input id="ovStage1" type="number" inputmode="numeric" min="0"></div>
+        <div><label for="ovRent">জুলাইয়ে প্রকৃত তোলা বাড়ি ভাড়া (২০১৫ স্কেলের ভিত্তিতে ইনক্রিমেন্ট অনুযায়ী বর্ধিত অংশসহ)</label><input id="ovRent" type="number" inputmode="numeric" min="0"></div>
+      </div>
+      <label for="ovSpecial">জুলাইয়ে প্রকৃত তোলা বিশেষ সুবিধা</label>
+      <input id="ovSpecial" type="number" inputmode="numeric" min="0">
+      <p class="note">খালি রাখলে বিশেষ সুবিধা প্রজ্ঞাপন (০৩-০৬-২০২৫) এর হার (গ্রেড ১-৯: ১০%, গ্রেড ১০-২০: ১৫%, সর্বনিম্ন ১,০০০) দিয়ে নিজে থেকে হিসাব হবে।</p>
+    </details>
+
+    <h2 style="margin-top:18px">কর্তন (সমন্বয় বিলের ওপর প্রযোজ্য, একবারই)</h2>
+    <div class="grid3">
+      <div><label for="ovKalyan">কল্যাণ তহবিল কর্তন (মাসিক পার্থক্য)</label><input id="ovKalyan" type="number" inputmode="numeric" min="0"><p class="note">খালি রাখলে স্বয়ংক্রিয়ভাবে হিসাব হবে: নতুন (২০২৬) বেসিকের ১% (সর্বোচ্চ ৳১৫০) বিয়োগ ১ জুলাই গৃহীত (২০১৫ স্কেল) বেসিকের ১% (সর্বোচ্চ ৳১৫০) — যা প্রতি মাসেই ইতিমধ্যে কর্তিত হয়ে গেছে। এই পার্থক্যই প্রতি মাসে বাড়তি কর্তনযোগ্য, তাই মাস সংখ্যা দিয়ে গুণ হবে।</p></div>
+      <div><label for="ovStamp">স্ট্যাম্প ডিউটি</label><input id="ovStamp" type="number" inputmode="numeric" min="0" value="10"></div>
+      <div><label for="gpfExtra">ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ঐচ্ছিক)</label><input id="gpfExtra" type="number" inputmode="numeric" min="0" value="0"><p class="note">আগে যা কর্তন হয়েছে তার চেয়ে বাড়তি যে মোট টাকা এখন জমা দিতে চান, সেটা এখানে দিন।</p></div>
+    </div>
+
+    <button class="btn" id="calcBtn">বকেয়া বিল তৈরি করুন</button>
+  </section>
+
+  <div id="msgs"></div>
+
+  <section class="card hidden" id="sumCard">
+    <h2>সারসংক্ষেপ</h2>
+    <p class="note" id="sumHead"></p>
+    <div id="sumBody"></div>
+  </section>
+
+  <section class="card hidden" id="tabCard">
+    <h2>মাসভিত্তিক বকেয়া/সমন্বয়ের হিসাব</h2>
+    <div style="overflow-x:auto"><table id="tab"></table></div>
+    <p class="note" style="margin-top:8px">বাড়ি ভাড়া ও বিশেষ সুবিধার লাল (ঋণাত্মক) অঙ্ক মানে সেটি মূল বকেয়া থেকে সমন্বয়/ফেরত হিসেবে বিয়োগ হয়েছে।</p>
+    <div class="noprint" style="margin-top:10px"><button class="btn2" id="govPrintBtn">সরকারি ফরম প্রিন্ট / PDF</button></div>
+  </section>
+
+  <section class="card hidden" id="officialCard">
+    <div class="gov" id="govForm"></div>
+  </section>
+
+  <section class="card noprint">
+    <details>
+      <summary>স্কেল টেবিল (দেখুন ও প্রয়োজনে সংশোধন করুন)</summary>
+      <div class="scaletab"><table id="scaleTab"></table></div>
+      <p class="note">এই টেবিলের কোনো সংখ্যা আপনার iBAS++ ফলাফলের সাথে না মিললে, ঐচ্ছিক অংশে সরাসরি সঠিক অঙ্ক বসিয়ে দিন — পুরো টেবিল বদলাতে হবে না।</p>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>সতর্কতা</h2>
+    <p class="note">এটি একটি সহায়ক হিসাবের টুল, চূড়ান্ত অনুমোদিত বিল নয়। বিশেষ সুবিধা ও বাড়ি ভাড়ার হিসাব ২০২৫-২৬ এর প্রজ্ঞাপনের সাধারণ সূত্র অনুসরণ করে — আপনার ক্ষেত্রে ব্যতিক্রম থাকলে (যেমন সরকারি বাসস্থান, বিশেষ এলাকা) ঐচ্ছিক অংশে সরাসরি প্রকৃত অঙ্ক বসান। শুধু মূল বেতন, বাড়ি ভাড়া ও বিশেষ সুবিধা — এই তিনটি উপাদান ধরা হয়েছে; অন্য কোনো ভাতা এই হিসাবে নেই।</p>
+  </section>
+
+  <section class="ad">এরকম ওয়েবসাইট, ওয়েব অ্যাপ, অটোমেশন টুল ডিজাইন করাতে চাইলে যোগাযোগ করুন 👉 01817662105, freelancer.abulhossain@gmail.com</section>
+</main>
+
+<footer>© Abul Hossain | Designed by Abul Hossain | যোগাযোগ: 01817662105, freelancer.abulhossain@gmail.com</footer>
+
+<script>
+/* ===== স্কেল ডেটা (এস.আর.ও. ৩৪৭-আইন/২০২৬) — পে-ফিক্সেশন টুলের সাথে অভিন্ন ===== */
+const OLD = {"1":[78000],"2":[66000,68480,71050,73720,76490],"3":[56500,58760,61120,63570,66120,68770,71530,74400],"4":[50000,52000,54080,56250,58500,60840,63280,65820,68460,71200],"5":[43000,44940,46970,49090,51300,53610,56030,58560,61200,63960,66840,69850],"6":[35500,37280,39150,41110,43170,45330,47600,49980,52480,55110,57870,60770,63810,67010],"7":[29000,30450,31980,33580,35260,37030,38890,40840,42890,45040,47300,49670,52160,54770,57510,60390,63410],"8":[23000,24150,25360,26630,27970,29370,30840,32390,34010,35720,37510,39390,41360,43430,45610,47900,50300,52820,55470],"9":[22000,23100,24260,25480,26760,28100,29510,30990,32540,34170,35880,37680,39570,41550,43630,45820,48120,50530,53060],"10":[16000,16800,17640,18530,19460,20440,21470,22550,23680,24870,26120,27430,28810,30260,31780,33370,35040,36800,38640],"11":[12500,13130,13790,14480,15210,15980,16780,17620,18510,19440,20420,21450,22530,23660,24850,26100,27410,28790,30230],"12":[11300,11870,12470,13100,13760,14450,15180,15940,16740,17580,18460,19390,20360,21380,22450,23580,24760,26000,27300],"13":[11000,11550,12130,12740,13380,14050,14760,15500,16280,17100,17960,18860,19810,20810,21860,22960,24110,25320,26590],"14":[10200,10710,11250,11820,12420,13050,13710,14400,15120,15880,16680,17520,18400,19320,20290,21310,22380,23500,24680],"15":[9700,10190,10700,11240,11810,12410,13040,13700,14390,15110,15870,16670,17510,18390,19310,20280,21300,22370,23490],"16":[9300,9770,10260,10780,11320,11890,12490,13120,13780,14470,15200,15960,16760,17600,18480,19410,20390,21410,22490],"17":[9000,9450,9930,10430,10960,11510,12090,12700,13340,14010,14720,15460,16240,17060,17920,18820,19770,20760,21800],"18":[8800,9240,9710,10200,10710,11250,11820,12420,13050,13710,14400,15120,15880,16680,17520,18400,19320,20290,21310],"19":[8500,8930,9380,9850,10350,10870,11420,12000,12600,13230,13900,14600,15330,16100,16910,17760,18650,19590,20570],"20":[8250,8670,9110,9570,10050,10560,11090,11650,12240,12860,13510,14190,14900,15650,16440,17270,18140,19050,20010]};
+const NEW = {"1":[156000],"2":[132000,135700,139400,143200,147200,151200,153000],"3":[113000,117000,121100,125300,129700,134300,139000,143800,148800],"4":[100000,103500,107200,110900,114800,118800,123000,127300,131700,136300,142400],"5":[86000,89500,93100,96800,100700,104700,108900,113200,117700,122500,127400,132400,139700],"6":[71000,74600,78300,82200,86400,90700,95200,100000,104900,110200,115700,121500,127600,134000],"7":[58000,60900,64000,67200,70500,74100,77800,81700,85700,90000,94500,99200,104200,109400,114900,120600,126800],"8":[46000,48300,50800,53300,56000,58800,61700,64800,68000,71400,75000,78700,82700,86800,91100,95700,100500,105500,110800],"9":[44000,46200,48600,51000,53500,56200,59000,62000,65100,68300,71700,75300,79100,83000,87200,91500,96100,100900,105900],"10":[32000,33600,35300,37100,38900,40900,42900,45100,47300,49700,52200,54800,57500,60400,63400,66600,69900,73400,77300],"11":[25000,26300,27600,29000,30400,32000,33600,35200,37000,38800,40800,42800,44900,47200,49500,52000,54600,57300,60500],"12":[24300,25600,26800,28200,29600,31100,32600,34200,36000,37700,39600,41600,43700,45900,48200,50600,53100,55700,58700],"13":[24000,25200,26500,27800,29200,30700,32200,33800,35500,37300,39100,41100,43200,45300,47600,49900,52400,55100,58000],"14":[23500,24700,26000,27300,28600,30000,31500,33100,34800,36500,38300,40200,42300,44400,46600,48900,51300,53900,56800],"15":[22800,24000,25200,26400,27800,29100,30600,32100,33700,35400,37200,39000,41000,43000,45200,47400,49800,52300,55200],"16":[21900,23000,24200,25400,26700,28000,29400,30900,32400,34000,35700,37500,39400,41300,43400,45600,47900,50200,52900],"17":[21400,22500,23600,24800,26100,27400,28700,30200,31700,33200,34900,36700,38500,40400,42400,44500,46800,49100,51900],"18":[21000,22100,23200,24400,25600,26900,28200,29600,31100,32600,34300,36000,37800,39600,41600,43700,45900,48200,50900],"19":[20500,21600,22700,23800,25000,26200,27500,28900,30300,31900,33400,35100,36900,38700,40600,42700,44800,47000,49600],"20":[20000,21000,22100,23200,24400,25600,26900,28200,29600,31100,32600,34300,36000,37800,39600,41600,43700,45900,48400]};
+const SPECIAL = {
+  "1": { label: "গ্রেড ১ (নির্ধারিত)", old: 78000, pay: 156000 },
+  "CS": { label: "মন্ত্রিপরিষদ সচিব", old: 86000, pay: 172000 },
+  "SS": { label: "সিনিয়র সচিব", old: 82000, pay: 164000 }
+};
+const bnNum = new Intl.NumberFormat("bn-BD");
+const bnNum2 = new Intl.NumberFormat("bn-BD", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// ভাতার হারে দশমিক (পয়সা) এলে তা রাখা হয় — রাউন্ড বা ফ্লোর করা হয় না, যেমনটা সরকার হিসাব করে।
+// মূল বেতনের ধাপ (গেজেটের রাউন্ড ফিগার) সবসময়ই পূর্ণ সংখ্যা থাকে, তাই এতে প্রভাব পড়ে না।
+const fmt = n => {
+  const a = Math.abs(n);
+  const whole = Math.abs(a - Math.round(a)) < 1e-9; // ভাসমান-বিন্দুর ক্ষুদ্র ত্রুটি উপেক্ষা
+  return (n < 0 ? "− " : "") + "৳ " + (whole ? bnNum.format(Math.round(a)) : bnNum2.format(a));
+};
+const $ = id => document.getElementById(id);
+const val = id => Number($(id).value) || 0;
+
+/* ===== মূল ফিক্সেশন — পে-ফিক্সেশন ক্যালকুলেটরের সাথে অভিন্ন লজিক (তারিখের বদলে সরাসরি চেকবক্স) ===== */
+/* ===== সংখ্যা থেকে বাংলা কথায় ===== */
+const BN_ONES = ["", "এক", "দুই", "তিন", "চার", "পাঁচ", "ছয়", "সাত", "আট", "নয়",
+  "দশ", "এগারো", "বারো", "তেরো", "চৌদ্দ", "পনেরো", "ষোল", "সতেরো", "আঠারো", "ঊনিশ",
+  "বিশ", "একুশ", "বাইশ", "তেইশ", "চব্বিশ", "পঁচিশ", "ছাব্বিশ", "সাতাশ", "আটাশ", "ঊনত্রিশ",
+  "ত্রিশ", "একত্রিশ", "বত্রিশ", "তেত্রিশ", "চৌত্রিশ", "পঁয়ত্রিশ", "ছত্রিশ", "সাঁইত্রিশ", "আটত্রিশ", "ঊনচল্লিশ",
+  "চল্লিশ", "একচল্লিশ", "বিয়াল্লিশ", "তেতাল্লিশ", "চুয়াল্লিশ", "পঁয়তাল্লিশ", "ছেচল্লিশ", "সাতচল্লিশ", "আটচল্লিশ", "ঊনপঞ্চাশ",
+  "পঞ্চাশ", "একান্ন", "বায়ান্ন", "তিপ্পান্ন", "চুয়ান্ন", "পঞ্চান্ন", "ছাপ্পান্ন", "সাতান্ন", "আটান্ন", "ঊনষাট",
+  "ষাট", "একষট্টি", "বাষট্টি", "তেষট্টি", "চৌষট্টি", "পঁয়ষট্টি", "ছেষট্টি", "সাতষট্টি", "আটষট্টি", "ঊনসত্তর",
+  "সত্তর", "একাত্তর", "বাহাত্তর", "তিয়াত্তর", "চুয়াত্তর", "পঁচাত্তর", "ছিয়াত্তর", "সাতাত্তর", "আটাত্তর", "ঊনআশি",
+  "আশি", "একাশি", "বিরাশি", "তিরাশি", "চুরাশি", "পঁচাশি", "ছিয়াশি", "সাতাশি", "আটাশি", "ঊননব্বই",
+  "নব্বই", "একানব্বই", "বিরানব্বই", "তিরানব্বই", "চুরানব্বই", "পঁচানব্বই", "ছিয়ানব্বই", "সাতানব্বই", "আটানব্বই", "নিরানব্বই"];
+function bnThree(n) {
+  let s = "";
+  if (n >= 100) { s += BN_ONES[Math.floor(n / 100)] + "শত "; n %= 100; }
+  if (n > 0) s += BN_ONES[n];
+  return s.trim();
+}
+function bnWords(num) {
+  let n = Math.floor(num);
+  if (n === 0) return "শূন্য";
+  const crore = Math.floor(n / 10000000); n %= 10000000;
+  const lakh = Math.floor(n / 100000); n %= 100000;
+  const thousand = Math.floor(n / 1000); n %= 1000;
+  const rest = n;
+  const parts = [];
+  if (crore) parts.push(bnThree(crore) + " কোটি");
+  if (lakh) parts.push(bnThree(lakh) + " লক্ষ");
+  if (thousand) parts.push(bnThree(thousand) + " হাজার");
+  if (rest) parts.push(bnThree(rest));
+  return parts.join(" ").trim() || "শূন্য";
+}
+function amountInWords(n) {
+  const neg = n < 0; const a = Math.abs(n);
+  const taka = Math.floor(a + 1e-9);
+  const paisa = Math.round((a - taka) * 100);
+  let s = bnWords(taka) + " টাকা" + (paisa > 0 ? " " + bnWords(paisa) + " পয়সা" : "") + " মাত্র";
+  return (neg ? "(ফেরত/সমন্বয়যোগ্য) " : "") + s;
+}
+
+function fixation(grade, juneBasic, eligible) {
+  const special = SPECIAL[grade];
+  const g = special ? 1 : Number(grade);
+  const p1 = g <= 9 ? 0.40 : 0.50;
+  const p2 = (1 - p1) / 2;
+  const F = { g, p1, p2 };
+  if (special || g === 1) {
+    const fixed = special ? special.pay : NEW[1][0];
+    F.fixedPost = true; F.l7 = F.l8 = F.full = fixed; F.l13 = F.l15 = fixed;
+    return F;
+  }
+  const oldS = OLD[g], newS = NEW[g], last = newS.length - 1;
+  const l6 = newS[0] + (juneBasic - oldS[0]);
+  let idx = newS.findIndex(v => v >= l6);
+  if (idx === -1) idx = last;
+  F.l7 = newS[idx];
+  F.l8 = newS[Math.min(idx + (eligible ? 1 : 0), last)];
+  F.full = F.l8;
+  const diff = F.l7 - juneBasic;
+  const lInc = F.l8 - F.l7;
+  F.l11 = Math.round(diff * p1);
+  F.l13 = juneBasic + F.l11 + lInc;
+  F.l14 = Math.round(diff * p2);
+  F.l15 = F.l13 + F.l14;
+  return F;
+}
+
+/* ===== ফর্ম প্রস্তুত ===== */
+function fillGrades() {
+  const s = $("grade");
+  for (let g = 20; g >= 1; g--) { const o = document.createElement("option"); o.value = g; o.textContent = "গ্রেড " + bnNum.format(g); s.appendChild(o); }
+  for (const k of ["SS", "CS"]) { const o = document.createElement("option"); o.value = k; o.textContent = SPECIAL[k].label; s.appendChild(o); }
+  s.value = "17";
+}
+function fillBasics() {
+  const g = $("grade").value, sp = SPECIAL[g];
+  const juneSel = $("juneSel"), julySel = $("julySel");
+  juneSel.innerHTML = ""; julySel.innerHTML = "";
+  const steps = sp ? [sp.old] : OLD[g];
+  steps.forEach((v, i) => {
+    const o1 = document.createElement("option"); o1.value = v; o1.textContent = fmt(v) + (i === 0 ? " (সর্বনিম্ন)" : ""); juneSel.appendChild(o1);
+    const o2 = document.createElement("option"); o2.value = v; o2.textContent = fmt(v); julySel.appendChild(o2);
+  });
+  syncJuly();
+}
+function syncJuly() {
+  if (!$("elig6").checked) { $("julySel").value = $("juneSel").value; return; }
+  const g = $("grade").value, sp = SPECIAL[g];
+  if (sp) return;
+  const steps = OLD[g];
+  const idx = steps.findIndex(v => String(v) === $("juneSel").value);
+  const next = steps[Math.min(idx + 1, steps.length - 1)];
+  $("julySel").value = next;
+}
+function buildScaleTable() {
+  let html = "<tr><th>গ্রেড</th><th>২০১৫ স্কেল</th><th>২০২৬ স্কেল</th></tr>";
+  for (let g = 1; g <= 20; g++) {
+    html += `<tr><td>${bnNum.format(g)}</td><td>${OLD[g].map(fmt).join(" – ")}</td><td>${NEW[g].map(fmt).join(" – ")}</td></tr>`;
+  }
+  $("scaleTab").innerHTML = html;
+}
+
+/* ===== হিসাব ও আউটপুট ===== */
+function render() {
+  const msgs = $("msgs"); msgs.innerHTML = "";
+  $("sumCard").classList.add("hidden"); $("tabCard").classList.add("hidden"); $("officialCard").classList.add("hidden");
+
+  const grade = $("grade").value, sp = SPECIAL[grade];
+  const juneBasic = Number($("juneSel").value);
+  const julyBasic = Number($("julySel").value);
+  const months = Math.max(1, Math.min(24, val("months")));
+  const ratePct = val("ratePct");
+  if (!juneBasic) { msgs.innerHTML = '<div class="warn">৩০ জুন ২০২৬ তারিখের মূল বেতন বাছাই করুন।</div>'; return; }
+
+  const F = fixation(grade, juneBasic, $("elig6").checked);
+  const ovFull = $("ovFull").value ? Number($("ovFull").value) : null;
+  const ovStage1 = $("ovStage1").value ? Number($("ovStage1").value) : null;
+  let stage1 = F.l13, stage2 = F.l15;
+  if (ovFull && !F.fixedPost) {
+    const diff = ovFull - juneBasic;
+    stage1 = juneBasic + Math.round(diff * F.p1);
+    stage2 = juneBasic + Math.round(diff * (F.p1 + F.p2));
+  }
+  if (ovStage1) stage1 = ovStage1;
+
+  // ভাতার হারে দশমিক (পয়সা) এলে তা অপরিবর্তিত রাখা হয় — রাউন্ড/ফ্লোর কোনোটাই নয়
+  const rentJulyActual = $("ovRent").value ? Number($("ovRent").value) : ratePct / 100 * julyBasic;
+  const rentRightful = ratePct / 100 * juneBasic;
+  const rentAdjust = rentRightful - rentJulyActual; // সাধারণত ঋণাত্মক (ফেরত/সমন্বয়)
+
+  const gBand = F.g <= 9 ? 10 : 15;
+  const specialJulyActual = $("ovSpecial").value ? Number($("ovSpecial").value) : Math.max(1000, gBand / 100 * julyBasic);
+  const specialAdjust = -specialJulyActual; // ১ জুলাই ২০২৬ থেকে সম্পূর্ণ বাতিল, তাই পুরোটাই সমন্বয়
+
+  const gLabel = sp ? sp.label : "গ্রেড " + bnNum.format(F.g);
+  let rows = [], totBasic = 0, totRent = 0, totSpecial = 0;
+  for (let m = 1; m <= months; m++) {
+    const stageBasic = (F.fixedPost || m <= 6) ? stage1 : stage2;
+    const basicArrear = stageBasic - julyBasic;
+    totBasic += basicArrear; totRent += rentAdjust; totSpecial += specialAdjust;
+    rows.push({ m, stageBasic, basicArrear, rentAdjust, specialAdjust, net: basicArrear + rentAdjust + specialAdjust });
+  }
+  const grandNet = totBasic + totRent + totSpecial;
+
+  // কর্তন (সমন্বয় বিলের ওপর একবারই প্রযোজ্য) — নতুন (প্রথম ধাপের) বেসিকের ভিত্তিতে
+  // কল্যাণ তহবিল প্রতি মাসেই কর্তিত হয় (একবারের নয়): নতুন হারের ১% (ক্যাপ ৳১৫০) থেকে
+  // ১ জুলাই গৃহীত (২০১৫ স্কেল) বেসিকের ভিত্তিতে ইতিমধ্যে কর্তিত ১% (ক্যাপ ৳১৫০) বাদ দিয়ে
+  // শুধু মাসিক পার্থক্যটুকু, মাস সংখ্যা দিয়ে গুণ করে ধরা হয়।
+  const kalyanNewPerMonth = Math.min(150, stage1 * 0.01);
+  const kalyanOldPerMonth = Math.min(150, julyBasic * 0.01);
+  const kalyanDiffAuto = kalyanNewPerMonth - kalyanOldPerMonth;
+  const kalyanPerMonth = $("ovKalyan").value ? Number($("ovKalyan").value) : kalyanDiffAuto;
+  const kalyan = kalyanPerMonth * months;
+  const stamp = val("ovStamp");
+  const gpfExtra = val("gpfExtra");
+  const totalDeduction = kalyan + stamp + gpfExtra;
+  const finalNet = grandNet - totalDeduction;
+
+  $("sumHead").textContent = gLabel + " | ৩০ জুন ২০২৬ মূল বেতন: " + fmt(juneBasic) + " | ১ জুলাই গৃহীত: " + fmt(julyBasic) + " | মেয়াদ: " + bnNum.format(months) + " মাস";
+  $("sumBody").innerHTML =
+    `<div class="row"><span>নতুন স্কেলে প্রথম ধাপের (জুলাই-ডিসেম্বর) মূল বেতন</span><span>${fmt(stage1)}</span></div>` +
+    (months > 6 ? `<div class="row"><span>দ্বিতীয় ধাপের (জানুয়ারি-জুন) মূল বেতন</span><span>${fmt(stage2)}</span></div>` : "") +
+    `<div class="row"><span>মূল বেতন বকেয়া (মোট ${bnNum.format(months)} মাস)</span><span>${fmt(totBasic)}</span></div>` +
+    `<div class="row"><span>বাড়ি ভাড়া সমন্বয় (রাইটফুল ${fmt(rentRightful)} − প্রকৃত তোলা ${fmt(rentJulyActual)}) × ${bnNum.format(months)} মাস</span><span class="${totRent < 0 ? "neg" : ""}">${fmt(totRent)}</span></div>` +
+    `<div class="row"><span>বিশেষ সুবিধা সমন্বয় (সম্পূর্ণ বাতিল) × ${bnNum.format(months)} মাস</span><span class="neg">${fmt(totSpecial)}</span></div>` +
+    `<div class="row total"><span>নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</span><span>${fmt(grandNet)}</span></div>` +
+    `<div class="row"><span>বিয়োগ: কল্যাণ তহবিল কর্তন (নতুন ৳${bnNum.format(Math.round(kalyanNewPerMonth*100)/100)} − ইতিমধ্যে কর্তিত ৳${bnNum.format(Math.round(kalyanOldPerMonth*100)/100)}) × ${bnNum.format(months)} মাস</span><span class="neg">− ${fmt(kalyan)}</span></div>` +
+    `<div class="row"><span>বিয়োগ: স্ট্যাম্প ডিউটি</span><span class="neg">− ${fmt(stamp)}</span></div>` +
+    (gpfExtra > 0 ? `<div class="row"><span>বিয়োগ: ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</span><span class="neg">− ${fmt(gpfExtra)}</span></div>` : "") +
+    `<div class="row total" style="font-size:1.15rem"><span>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ</span><span>${fmt(finalNet)}</span></div>` +
+    `<p class="note" style="margin-top:6px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
+  $("sumCard").classList.remove("hidden");
+
+  $("tab").innerHTML = `<tr><th>মাস</th><th class="n">নতুন মূল বেতন</th><th class="n">বেতন বকেয়া</th><th class="n">বাড়ি ভাড়া সমন্বয়</th><th class="n">বিশেষ সুবিধা সমন্বয়</th><th class="n">নিট</th></tr>` +
+    rows.map(r => `<tr><td>${bnNum.format(r.m)} নং মাস</td><td class="n">${fmt(r.stageBasic)}</td><td class="n">${fmt(r.basicArrear)}</td><td class="n neg">${fmt(r.rentAdjust)}</td><td class="n neg">${fmt(r.specialAdjust)}</td><td class="n">${fmt(r.net)}</td></tr>`).join("") +
+    `<tr class="net"><td colspan="5" style="text-align:right">সর্বমোট নিট</td><td class="n">${fmt(grandNet)}</td></tr>`;
+  $("tabCard").classList.remove("hidden");
+
+  renderGov(gLabel, juneBasic, julyBasic, months, stage1, stage2, rows, totBasic, totRent, totSpecial, grandNet, rentRightful, rentJulyActual, specialJulyActual, kalyan, stamp, gpfExtra, finalNet, kalyanNewPerMonth, kalyanOldPerMonth);
+}
+
+function renderGov(gLabel, juneBasic, julyBasic, months, stage1, stage2, rows, totBasic, totRent, totSpecial, grandNet, rentRightful, rentJulyActual, specialJulyActual, kalyan, stamp, gpfExtra, finalNet, kalyanNewPerMonth, kalyanOldPerMonth) {
+  const hdr = (lb, vv) => `<div class="idrow"><span class="lb">${lb}</span><span class="dots"></span><span class="vv">${vv || ""}</span></div>`;
+  let html = `<h3>বকেয়া/সমন্বয় বিল স্টেটমেন্ট</h3><div class="sub">জাতীয় বেতন স্কেল ২০২৬ (এস.আর.ও. ৩৪৭-আইন/২০২৬) অনুযায়ী</div>`;
+  html += hdr("নাম", $("empName").value.trim());
+  html += hdr("পদবি", $("desig").value.trim() ? $("desig").value.trim() + " (" + gLabel + ")" : gLabel);
+  html += hdr("অফিস/প্রতিষ্ঠান", $("offName").value.trim());
+  html += hdr("৩০ জুন ২০২৬ মূল বেতন", fmt(juneBasic));
+  html += hdr("১ জুলাই ২০২৬ গৃহীত মূল বেতন (২০১৫ স্কেল)", fmt(julyBasic));
+  html += hdr("বকেয়ার মেয়াদ", bnNum.format(months) + " মাস");
+  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th>মাস</th><th>নতুন মূল বেতন</th><th>বেতন বকেয়া</th><th>বাড়ি ভাড়া সমন্বয়</th><th>বিশেষ সুবিধা সমন্বয়</th><th>নিট</th></tr>` +
+    rows.map(r => `<tr><td>${bnNum.format(r.m)}</td><td>${fmt(r.stageBasic)}</td><td>${fmt(r.basicArrear)}</td><td>${fmt(r.rentAdjust)}</td><td>${fmt(r.specialAdjust)}</td><td>${fmt(r.net)}</td></tr>`).join("") +
+    `<tr><td colspan="5" style="text-align:right;font-weight:700">মোট</td><td style="font-weight:700">${fmt(totBasic + totRent + totSpecial)}</td></tr>` +
+    `<tr class="net"><td colspan="5" style="text-align:right">সর্বমোট নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</td><td>${fmt(grandNet)}</td></tr></table>`;
+  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th colspan="2">কর্তন (সমন্বয় বিলের ওপর একবারই)</th></tr>` +
+    `<tr><td>কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
+    `<tr><td>স্ট্যাম্প ডিউটি</td><td>${fmt(stamp)}</td></tr>` +
+    (gpfExtra > 0 ? `<tr><td>ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</td><td>${fmt(gpfExtra)}</td></tr>` : "") +
+    `<tr class="net"><td>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ (অংকে)</td><td>${fmt(finalNet)}</td></tr></table>`;
+  html += `<p style="margin-top:10px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
+  html += `<div class="sig"><span class="l">ডিডিও / হিসাবরক্ষণ কর্মকর্তার স্বাক্ষর</span></div>`;
+  $("govForm").innerHTML = html;
+  $("officialCard").classList.remove("hidden");
+}
+
+/* ===== ইভেন্ট ===== */
+fillGrades(); fillBasics(); buildScaleTable();
+$("grade").addEventListener("change", fillBasics);
+$("juneSel").addEventListener("change", syncJuly);
+$("elig6").addEventListener("change", syncJuly);
+$("area").addEventListener("change", () => { $("ratePct").value = $("area").value; });
+$("calcBtn").addEventListener("click", render);
+$("govPrintBtn")?.addEventListener("click", () => { document.body.classList.add("print-official"); window.print(); });
+window.addEventListener("afterprint", () => document.body.classList.remove("print-official"));
+</script>
+</body>
+</html>
