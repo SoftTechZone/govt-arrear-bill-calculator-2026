@@ -359,7 +359,7 @@ function render() {
     `<div class="row"><span>৩১১১৩৫২ বিশেষ সুবিধা সমন্বয় (সম্পূর্ণ বাতিল) × ${bnNum.format(months)} মাস</span><span class="neg">${fmt(totSpecial)}</span></div>` +
     `<div class="row total"><span>নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</span><span>${fmt(grandNet)}</span></div>` +
     `<div class="row"><span>বিয়োগ: ৮১৭২৫০৩ কল্যাণ তহবিল কর্তন (নতুন ৳${bnNum.format(Math.round(kalyanNewPerMonth*100)/100)} − ইতিমধ্যে কর্তিত ৳${bnNum.format(Math.round(kalyanOldPerMonth*100)/100)}) × ${bnNum.format(months)} মাস</span><span class="neg">− ${fmt(kalyan)}</span></div>` +
-    `<div class="row"><span>বিয়োগ: ১১৬২১০১ স্ট্যাম্প ডিউটি</span><span class="neg">− ${fmt(stamp)}</span></div>` +
+    `<div class="row"><span>বিয়োগ: ১১৬২১০১ স্ট্যাম্প ডিউটি (ম্যানুয়াল বিল করলে ১০ টাকা মুছে দিয়ে হিসাব করুন)</span><span class="neg">− ${fmt(stamp)}</span></div>` +
     (gpfExtra > 0 ? `<div class="row"><span>বিয়োগ: ৮১১২২০১ ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</span><span class="neg">− ${fmt(gpfExtra)}</span></div>` : "") +
     `<div class="row total" style="font-size:1.15rem"><span>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ</span><span>${fmt(finalNet)}</span></div>` +
     `<p class="note" style="margin-top:6px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
@@ -388,7 +388,7 @@ function renderGov(gLabel, juneBasic, julyBasic, months, stage1, stage2, rows, t
     `<tr class="net"><td colspan="5" style="text-align:right">সর্বমোট নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</td><td>${fmt(grandNet)}</td></tr></table>`;
   html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th colspan="2">কর্তন (সমন্বয় বিলের ওপর একবারই)</th></tr>` +
     `<tr><td>৮১৭২৫০৩ কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
-    `<tr><td>১১৬২১০১ স্ট্যাম্প ডিউটি</td><td>${fmt(stamp)}</td></tr>` +
+    `<tr><td>১১৬২১০১ স্ট্যাম্প ডিউটি (ম্যানুয়াল বিলে শূন্য হবে, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হবে)</td><td>${fmt(stamp)}</td></tr>` +
     (gpfExtra > 0 ? `<tr><td>ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</td><td>${fmt(gpfExtra)}</td></tr>` : "") +
     `<tr class="net"><td>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ (অংকে)</td><td>${fmt(finalNet)}</td></tr></table>`;
   html += `<p style="margin-top:10px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
