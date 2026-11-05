@@ -100,14 +100,15 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:18px 12px 3
       <div><label for="julySel">১ জুলাই ২০২৬-এ গৃহীত মূল বেতন (বার্ষিক বৃদ্ধিসহ, যা তুলেছেন)</label><select id="julySel"></select></div>
     </div>
     <div class="grid3">
-      <div><label for="area">কর্মস্থল (বাড়ি ভাড়ার হার)</label>
+      <div><label for="area">কর্মস্থলের এলাকা (বাড়ি ভাড়া ভাতা — চাকরি (বেতন ও ভাতাদি) আদেশ, ২০১৫ এর অনুচ্ছেদ ১৭ অনুযায়ী)</label>
         <select id="area">
-          <option value="45">ঢাকা উত্তর/দক্ষিণ সিটি কর্পোরেশন</option>
-          <option value="35">অন্যান্য সিটি কর্পোরেশন এলাকা</option>
-          <option value="25" selected>অন্যান্য সব স্থান</option>
+          <option value="dhaka">ঢাকা উত্তর ও দক্ষিণ সিটি কর্পোরেশন এলাকা</option>
+          <option value="city">খুলনা, রাজশাহী, চট্টগ্রাম, সিলেট, বরিশাল, নারায়ণগঞ্জ, কুমিল্লা, রংপুর, গাজীপুর, ময়মনসিংহ ও বগুড়া সিটি কর্পোরেশন এবং সাভার ও কক্সবাজার পৌর এলাকা</option>
+          <option value="other" selected>অন্যান্য সব স্থান</option>
+          <option value="gov">সরকারি বাসস্থানে থাকি (বাড়ি ভাড়া ভাতা নেই)</option>
         </select>
+        <p class="note" id="rateInfo"></p>
       </div>
-      <div><label for="ratePct">বাড়ি ভাড়ার হার (%) — পে-স্লিপের সাথে মিলিয়ে নিন</label><input id="ratePct" type="number" inputmode="numeric" min="0" max="100" value="25"></div>
       <div><label for="months">বকেয়ার মাস সংখ্যা</label><input id="months" type="number" inputmode="numeric" min="1" max="24" value="3"></div>
     </div>
     <label class="chk"><input type="checkbox" id="elig6" checked> ১ জুলাই ২০২৬ এর মধ্যে চাকরির বয়স ন্যূনতম ৬ মাস (১টি বার্ষিক বেতনবৃদ্ধি যোগ হবে)</label>
@@ -126,9 +127,9 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:18px 12px 3
 
     <h2 style="margin-top:18px">কর্তন (সমন্বয় বিলের ওপর প্রযোজ্য, একবারই)</h2>
     <div class="grid3">
-      <div><label for="ovKalyan">৮১৭২৫০৩ কর্মচারী কল্যাণ তহবিল কর্তন (মাসিক পার্থক্য)</label><input id="ovKalyan" type="number" inputmode="numeric" min="0"><p class="note">খালি রাখলে স্বয়ংক্রিয়ভাবে হিসাব হবে: নতুন (২০২৬) বেসিকের ১% (সর্বোচ্চ ৳১৫০) বিয়োগ ১ জুলাই গৃহীত (২০১৫ স্কেল) বেসিকের ১% (সর্বোচ্চ ৳১৫০) — যা প্রতি মাসেই ইতিমধ্যে কর্তিত হয়ে গেছে। এই পার্থক্যই প্রতি মাসে বাড়তি কর্তনযোগ্য, তাই মাস সংখ্যা দিয়ে গুণ হবে।</p></div>
-      <div><label for="ovStamp">১১৬২১০১ স্ট্যাম্প ডিউটি</label><input id="ovStamp" type="number" inputmode="numeric" min="0" value="10"></div>
-      <div><label for="gpfExtra">৮১১২২০১ ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ঐচ্ছিক)</label><input id="gpfExtra" type="number" inputmode="numeric" min="0" value="0"><p class="note">আগে যা কর্তন হয়েছে তার চেয়ে বাড়তি যে মোট টাকা এখন জমা দিতে চান, সেটা এখানে দিন।</p></div>
+      <div><label for="ovKalyan">কল্যাণ তহবিল কর্তন (মাসিক পার্থক্য)</label><input id="ovKalyan" type="number" inputmode="numeric" min="0"><p class="note">খালি রাখলে স্বয়ংক্রিয়ভাবে হিসাব হবে: নতুন (২০২৬) বেসিকের ১% (সর্বোচ্চ ৳১৫০) বিয়োগ ১ জুলাই গৃহীত (২০১৫ স্কেল) বেসিকের ১% (সর্বোচ্চ ৳১৫০) — যা প্রতি মাসেই ইতিমধ্যে কর্তিত হয়ে গেছে। এই পার্থক্যই প্রতি মাসে বাড়তি কর্তনযোগ্য, তাই মাস সংখ্যা দিয়ে গুণ হবে।</p></div>
+      <div><label for="ovStamp">স্ট্যাম্প ডিউটি [ম্যানুয়ালি বিল করার ক্ষেত্রে শূন্য (০) রাখবেন, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হয়] </label><input id="ovStamp" type="number" inputmode="numeric" min="0" value="10"></div>
+      <div><label for="gpfExtra">ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ঐচ্ছিক/ ম্যানুয়াল বিলের ক্ষেত্রে প্রযোজ্য নয়)</label><input id="gpfExtra" type="number" inputmode="numeric" min="0" value="0"><p class="note">আগে যা কর্তন হয়েছে তার চেয়ে বাড়তি যে মোট টাকা এখন জমা দিতে চান, সেটা এখানে দিন।</p></div>
     </div>
 
     <button class="btn" id="calcBtn">বকেয়া বিল তৈরি করুন</button>
@@ -189,6 +190,18 @@ const fmt = n => {
   const whole = Math.abs(a - Math.round(a)) < 1e-9; // ভাসমান-বিন্দুর ক্ষুদ্র ত্রুটি উপেক্ষা
   return (n < 0 ? "− " : "") + "৳ " + (whole ? bnNum.format(Math.round(a)) : bnNum2.format(a));
 };
+const HRA2015 = {
+  dhaka: [[9700, .65, 5600], [16000, .60, 6400], [35500, .55, 9600], [Infinity, .50, 19500]],
+  city:  [[9700, .55, 5000], [16000, .50, 5400], [35500, .45, 8000], [Infinity, .40, 16000]],
+  other: [[9700, .50, 4500], [16000, .45, 4800], [35500, .40, 7000], [Infinity, .35, 13800]]
+};
+// বাড়ি ভাড়া = মূল বেতনের শতাংশ বা ন্যূনতম ভাতা — যেটি বেশি (সরকারি বাসস্থানে থাকলে ০)
+function hraCalc(area, basic) {
+  if (area === "gov") return { amt: 0, pct: 0, min: 0 };
+  for (const [thr, pct, min] of HRA2015[area]) {
+    if (basic <= thr) { const byPct = basic * pct; return { amt: Math.max(byPct, min), pct, min, usedMin: min > byPct }; }
+  }
+}
 const $ = id => document.getElementById(id);
 const val = id => Number($(id).value) || 0;
 
@@ -303,7 +316,7 @@ function render() {
   const juneBasic = Number($("juneSel").value);
   const julyBasic = Number($("julySel").value);
   const months = Math.max(1, Math.min(24, val("months")));
-  const ratePct = val("ratePct");
+  const area = $("area").value;
   if (!juneBasic) { msgs.innerHTML = '<div class="warn">৩০ জুন ২০২৬ তারিখের মূল বেতন বাছাই করুন।</div>'; return; }
 
   const F = fixation(grade, juneBasic, $("elig6").checked);
@@ -318,8 +331,10 @@ function render() {
   if (ovStage1) stage1 = ovStage1;
 
   // ভাতার হারে দশমিক (পয়সা) এলে তা অপরিবর্তিত রাখা হয় — রাউন্ড/ফ্লোর কোনোটাই নয়
-  const rentJulyActual = $("ovRent").value ? Number($("ovRent").value) : ratePct / 100 * julyBasic;
-  const rentRightful = ratePct / 100 * juneBasic;
+  // ৩০ জুনের বেসিক ও ১ জুলাইয়ের বেসিক আলাদা স্তরে (টিয়ারে) পড়তে পারে — তাই দুটো আলাদাভাবে হিসাব
+  const hraJune = hraCalc(area, juneBasic), hraJuly = hraCalc(area, julyBasic);
+  const rentJulyActual = $("ovRent").value ? Number($("ovRent").value) : hraJuly.amt;
+  const rentRightful = hraJune.amt;
   const rentAdjust = rentRightful - rentJulyActual; // সাধারণত ঋণাত্মক (ফেরত/সমন্বয়)
 
   const gBand = F.g <= 9 ? 10 : 15;
@@ -354,13 +369,13 @@ function render() {
   $("sumBody").innerHTML =
     `<div class="row"><span>নতুন স্কেলে প্রথম ধাপের (জুলাই-ডিসেম্বর) মূল বেতন</span><span>${fmt(stage1)}</span></div>` +
     (months > 6 ? `<div class="row"><span>দ্বিতীয় ধাপের (জানুয়ারি-জুন) মূল বেতন</span><span>${fmt(stage2)}</span></div>` : "") +
-    `<div class="row"><span>৩১১১২০১ মূল বেতন বকেয়া (মোট ${bnNum.format(months)} মাস)</span><span>${fmt(totBasic)}</span></div>` +
-    `<div class="row"><span>৩১১১৩১০ বাড়ি ভাড়া সমন্বয় (রাইটফুল ${fmt(rentRightful)} − প্রকৃত তোলা ${fmt(rentJulyActual)}) × ${bnNum.format(months)} মাস</span><span class="${totRent < 0 ? "neg" : ""}">${fmt(totRent)}</span></div>` +
-    `<div class="row"><span>৩১১১৩৫২ বিশেষ সুবিধা সমন্বয় (সম্পূর্ণ বাতিল) × ${bnNum.format(months)} মাস</span><span class="neg">${fmt(totSpecial)}</span></div>` +
+    `<div class="row"><span>মূল বেতন বকেয়া (মোট ${bnNum.format(months)} মাস)</span><span>${fmt(totBasic)}</span></div>` +
+    `<div class="row"><span>বাড়ি ভাড়া সমন্বয় (রাইটফুল ${fmt(rentRightful)} − প্রকৃত তোলা ${fmt(rentJulyActual)}) × ${bnNum.format(months)} মাস</span><span class="${totRent < 0 ? "neg" : ""}">${fmt(totRent)}</span></div>` +
+    `<div class="row"><span>বিশেষ সুবিধা সমন্বয় (সম্পূর্ণ বাতিল) × ${bnNum.format(months)} মাস</span><span class="neg">${fmt(totSpecial)}</span></div>` +
     `<div class="row total"><span>নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</span><span>${fmt(grandNet)}</span></div>` +
-    `<div class="row"><span>বিয়োগ: ৮১৭২৫০৩ কল্যাণ তহবিল কর্তন (নতুন ৳${bnNum.format(Math.round(kalyanNewPerMonth*100)/100)} − ইতিমধ্যে কর্তিত ৳${bnNum.format(Math.round(kalyanOldPerMonth*100)/100)}) × ${bnNum.format(months)} মাস</span><span class="neg">− ${fmt(kalyan)}</span></div>` +
-    `<div class="row"><span>বিয়োগ: ১১৬২১০১ স্ট্যাম্প ডিউটি (ম্যানুয়াল বিল করলে ১০ টাকা মুছে দিয়ে হিসাব করুন)</span><span class="neg">− ${fmt(stamp)}</span></div>` +
-    (gpfExtra > 0 ? `<div class="row"><span>বিয়োগ: ৮১১২২০১ ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</span><span class="neg">− ${fmt(gpfExtra)}</span></div>` : "") +
+    `<div class="row"><span>বিয়োগ: কল্যাণ তহবিল কর্তন (নতুন ৳${bnNum.format(Math.round(kalyanNewPerMonth*100)/100)} − ইতিমধ্যে কর্তিত ৳${bnNum.format(Math.round(kalyanOldPerMonth*100)/100)}) × ${bnNum.format(months)} মাস</span><span class="neg">− ${fmt(kalyan)}</span></div>` +
+    `<div class="row"><span>বিয়োগ: স্ট্যাম্প ডিউটি [ম্যানুয়ালি বিল করার ক্ষেত্রে শূন্য (০) রাখবেন, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হয়]</span><span class="neg">− ${fmt(stamp)}</span></div>` +
+    (gpfExtra > 0 ? `<div class="row"><span>বিয়োগ: ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ম্যানুয়াল বিলে প্রযোজ্য নয়)</span><span class="neg">− ${fmt(gpfExtra)}</span></div>` : "") +
     `<div class="row total" style="font-size:1.15rem"><span>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ</span><span>${fmt(finalNet)}</span></div>` +
     `<p class="note" style="margin-top:6px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
   $("sumCard").classList.remove("hidden");
@@ -379,20 +394,20 @@ function renderGov(gLabel, juneBasic, julyBasic, months, stage1, stage2, rows, t
   html += hdr("নাম", $("empName").value.trim());
   html += hdr("পদবি", $("desig").value.trim() ? $("desig").value.trim() + " (" + gLabel + ")" : gLabel);
   html += hdr("অফিস/প্রতিষ্ঠান", $("offName").value.trim());
-  html += hdr("৩০ জুন ২০২৬ মূল বেতন - ৩১১১২০১", fmt(juneBasic));
-  html += hdr("১ জুলাই ২০২৬ গৃহীত মূল বেতন- ৩১১১২০১ (২০১৫ স্কেল)", fmt(julyBasic));
+  html += hdr("৩০ জুন ২০২৬ মূল বেতন", fmt(juneBasic));
+  html += hdr("১ জুলাই ২০২৬ গৃহীত মূল বেতন (২০১৫ স্কেল)", fmt(julyBasic));
   html += hdr("বকেয়ার মেয়াদ", bnNum.format(months) + " মাস");
-  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th>মাস</th><th>নতুন মূল বেতন-৩১১১২০১</th><th>বেতন বকেয়া-৩১১১২০১</th><th>বাড়ি ভাড়া-৩১১১৩১০ সমন্বয়</th><th>বিশেষ সুবিধা-৩১১১৩৫২ সমন্বয়</th><th>নিট</th></tr>` +
+  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th>মাস</th><th>নতুন মূল বেতন</th><th>বেতন বকেয়া</th><th>বাড়ি ভাড়া সমন্বয়</th><th>বিশেষ সুবিধা সমন্বয়</th><th>নিট</th></tr>` +
     rows.map(r => `<tr><td>${bnNum.format(r.m)}</td><td>${fmt(r.stageBasic)}</td><td>${fmt(r.basicArrear)}</td><td>${fmt(r.rentAdjust)}</td><td>${fmt(r.specialAdjust)}</td><td>${fmt(r.net)}</td></tr>`).join("") +
     `<tr><td colspan="5" style="text-align:right;font-weight:700">মোট</td><td style="font-weight:700">${fmt(totBasic + totRent + totSpecial)}</td></tr>` +
     `<tr class="net"><td colspan="5" style="text-align:right">সর্বমোট নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</td><td>${fmt(grandNet)}</td></tr></table>`;
   html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th colspan="2">কর্তন (সমন্বয় বিলের ওপর একবারই)</th></tr>` +
-    `<tr><td>৮১৭২৫০৩ কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
-    `<tr><td>১১৬২১০১ স্ট্যাম্প ডিউটি (ম্যানুয়াল বিলে শূন্য হবে, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হবে)</td><td>${fmt(stamp)}</td></tr>` +
-    (gpfExtra > 0 ? `<tr><td>ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা</td><td>${fmt(gpfExtra)}</td></tr>` : "") +
+    `<tr><td>কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
+    `<tr><td>স্ট্যাম্প ডিউটি [ম্যানুয়ালি বিল করার ক্ষেত্রে শূন্য (০) রাখবেন, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হয়]</td><td>${fmt(stamp)}</td></tr>` +
+    (gpfExtra > 0 ? `<tr><td>ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ম্যানুয়াল বিলে প্রযোজ্য নয়)</td><td>${fmt(gpfExtra)}</td></tr>` : "") +
     `<tr class="net"><td>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ (অংকে)</td><td>${fmt(finalNet)}</td></tr></table>`;
   html += `<p style="margin-top:10px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
-  html += `<div class="sig"><span class="l">ডিডিও / আয়ন কর্মকর্তার স্বাক্ষর</span></div>`;
+  html += `<div class="sig"><span class="l">ডিডিও / হিসাবরক্ষণ কর্মকর্তার স্বাক্ষর</span></div>`;
   $("govForm").innerHTML = html;
   $("officialCard").classList.remove("hidden");
 }
@@ -402,7 +417,15 @@ fillGrades(); fillBasics(); buildScaleTable();
 $("grade").addEventListener("change", fillBasics);
 $("juneSel").addEventListener("change", syncJuly);
 $("elig6").addEventListener("change", syncJuly);
-$("area").addEventListener("change", () => { $("ratePct").value = $("area").value; });
+function showRateInfo() {
+  const a = $("area").value, j = Number($("juneSel").value), l = Number($("julySel").value);
+  if (a === "gov") { $("rateInfo").textContent = "সরকারি বাসস্থানে বাড়ি ভাড়া ভাতা প্রাপ্য নয় (অনুচ্ছেদ ১৭)।"; return; }
+  const x = hraCalc(a, j), y = hraCalc(a, l);
+  const f = o => bnNum.format(Math.round(o.pct * 100)) + "% (ন্যূনতম ৳" + bnNum.format(o.min) + ")";
+  $("rateInfo").textContent = "৩০ জুনের বেসিকে হার: " + f(x) + " | ১ জুলাইয়ের বেসিকে হার: " + f(y) + " — যেটি বেশি সেটাই প্রযোজ্য।";
+}
+["area", "juneSel", "julySel"].forEach(id => $(id).addEventListener("change", showRateInfo));
+showRateInfo();
 $("calcBtn").addEventListener("click", render);
 $("govPrintBtn")?.addEventListener("click", () => { document.body.classList.add("print-official"); window.print(); });
 window.addEventListener("afterprint", () => document.body.classList.remove("print-official"));
