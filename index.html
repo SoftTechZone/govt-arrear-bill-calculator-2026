@@ -394,20 +394,20 @@ function renderGov(gLabel, juneBasic, julyBasic, months, stage1, stage2, rows, t
   html += hdr("নাম", $("empName").value.trim());
   html += hdr("পদবি", $("desig").value.trim() ? $("desig").value.trim() + " (" + gLabel + ")" : gLabel);
   html += hdr("অফিস/প্রতিষ্ঠান", $("offName").value.trim());
-  html += hdr("৩০ জুন ২০২৬ মূল বেতন", fmt(juneBasic));
-  html += hdr("১ জুলাই ২০২৬ গৃহীত মূল বেতন (২০১৫ স্কেল)", fmt(julyBasic));
+  html += hdr("৩০ জুন ২০২৬ মূল বেতন - ৩১১১২০১", fmt(juneBasic));
+  html += hdr("১ জুলাই ২০২৬ গৃহীত মূল বেতন- ৩১১১২০১ (২০১৫ স্কেল)", fmt(julyBasic));
   html += hdr("বকেয়ার মেয়াদ", bnNum.format(months) + " মাস");
-  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th>মাস</th><th>নতুন মূল বেতন</th><th>বেতন বকেয়া</th><th>বাড়ি ভাড়া সমন্বয়</th><th>বিশেষ সুবিধা সমন্বয়</th><th>নিট</th></tr>` +
+  html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th>মাস</th><th>নতুন মূল বেতন-৩১১১২০১</th><th>বেতন বকেয়া-৩১১১২০১</th><th>বাড়ি ভাড়া-৩১১১৩১০ সমন্বয়</th><th>বিশেষ সুবিধা-৩১১১৩৫২ সমন্বয়</th><th>নিট</th></tr>` +
     rows.map(r => `<tr><td>${bnNum.format(r.m)}</td><td>${fmt(r.stageBasic)}</td><td>${fmt(r.basicArrear)}</td><td>${fmt(r.rentAdjust)}</td><td>${fmt(r.specialAdjust)}</td><td>${fmt(r.net)}</td></tr>`).join("") +
     `<tr><td colspan="5" style="text-align:right;font-weight:700">মোট</td><td style="font-weight:700">${fmt(totBasic + totRent + totSpecial)}</td></tr>` +
     `<tr class="net"><td colspan="5" style="text-align:right">সর্বমোট নিট প্রদেয়/সমন্বয় (কর্তনের পূর্বে)</td><td>${fmt(grandNet)}</td></tr></table>`;
   html += `<table style="width:100%;border-collapse:collapse;margin-top:10px"><tr><th colspan="2">কর্তন (সমন্বয় বিলের ওপর একবারই)</th></tr>` +
-    `<tr><td>কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
-    `<tr><td>স্ট্যাম্প ডিউটি [ম্যানুয়ালি বিল করার ক্ষেত্রে শূন্য (০) রাখবেন, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হয়]</td><td>${fmt(stamp)}</td></tr>` +
+    `<tr><td>৮১৭২৫০৩-কল্যাণ তহবিল কর্তন (নতুন ${fmt(kalyanNewPerMonth)} − পূর্বে কর্তিত ${fmt(kalyanOldPerMonth)}) × ${bnNum.format(months)} মাস</td><td>${fmt(kalyan)}</td></tr>` +
+    `<tr><td>১১৬২১০১-স্ট্যাম্প ডিউটি [ম্যানুয়ালি বিল করার ক্ষেত্রে শূন্য (০) রাখবেন, কারণ স্ট্যাম্প নগদ টাকায় ক্রয় করতে হয়]</td><td>${fmt(stamp)}</td></tr>` +
     (gpfExtra > 0 ? `<tr><td>ভবিষ্য তহবিলে (GPF) অতিরিক্ত চাঁদা (ম্যানুয়াল বিলে প্রযোজ্য নয়)</td><td>${fmt(gpfExtra)}</td></tr>` : "") +
     `<tr class="net"><td>সমন্বয়ের পর প্রাপ্য বকেয়া বিলের পরিমাণ (অংকে)</td><td>${fmt(finalNet)}</td></tr></table>`;
   html += `<p style="margin-top:10px"><b>কথায়:</b> ${amountInWords(finalNet)}</p>`;
-  html += `<div class="sig"><span class="l">ডিডিও / হিসাবরক্ষণ কর্মকর্তার স্বাক্ষর</span></div>`;
+  html += `<div class="sig"><span class="l">আয়ন কর্মকর্তার স্বাক্ষর</span></div>`;
   $("govForm").innerHTML = html;
   $("officialCard").classList.remove("hidden");
 }
